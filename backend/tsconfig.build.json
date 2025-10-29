@@ -1,0 +1,8 @@
+// backend/tsconfig.build.json
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./dist"
+  },
+  "exclude": ["node_modules", "test", "dist", "**/*spec.ts", "src/seed.ts"]
+}
