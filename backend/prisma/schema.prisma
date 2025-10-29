@@ -1,0 +1,60 @@
+// backend/prisma/schema.prisma
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  OVERSEER
+  SCHOOL_ADMIN
+}
+
+model School {
+  id            String    @id @default(cuid())
+  name          String
+  slug          String    @unique
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  reports       Report[]
+  users         User[]
+  storageQuota  Int       @default(2147483648)
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  role      Role
+  schoolId  String?
+  school    School?  @relation(fields: [schoolId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Report {
+  id             String       @id @default(cuid())
+  schoolId       String
+  school         School       @relation(fields: [schoolId], references: [id])
+  description    String
+  category       String?
+  incidentDate   DateTime?
+  contactEmail   String?
+  contactPhone   String?
+  createdAt      DateTime     @default(now())
+  attachments    Attachment[]
+}
+
+model Attachment {
+  id        String   @id @default(cuid())
+  reportId  String
+  report    Report   @relation(fields: [reportId], references: [id], onDelete: Cascade)
+  filename  String
+  mimetype  String
+  size      Int
+  path      String
+  createdAt DateTime @default(now())
+}
