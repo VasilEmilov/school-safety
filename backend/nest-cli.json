@@ -1,4 +1,3 @@
-// backend/nest-cli.json
 {
   "collection": "@nestjs/schematics",
   "sourceRoot": "src"

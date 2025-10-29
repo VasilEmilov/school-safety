@@ -1,4 +1,3 @@
-// README.md
 # School Safety Reporting Platform
 
 This repository contains the local-first school violence reporting platform with a NestJS backend and Vite React frontend.

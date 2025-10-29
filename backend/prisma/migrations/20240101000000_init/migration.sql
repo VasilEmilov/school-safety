@@ -1,4 +1,3 @@
-// backend/prisma/migrations/20240101000000_init/migration.sql
 -- CreateEnum
 CREATE TYPE "Role" AS ENUM ('OVERSEER', 'SCHOOL_ADMIN');
 
